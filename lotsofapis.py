@@ -47,9 +47,9 @@ session.commit()
 
 
 # Collection for Game APIs
-api_category1 = ApiCategory(name="Games")
+api_category2 = ApiCategory(name="Games")
 
-session.add(api_category1)
+session.add(api_category2)
 session.commit()
 
 api1 = MenuItem(title="Texas Hold 'Em", description="Easily develop a poker texas holdem game, just design the graphic.",
@@ -68,9 +68,9 @@ session.commit()
 
 
 # Collection for Lyrics APIs
-api_category1 = ApiCategory(name="Lyrics")
+api_category3 = ApiCategory(name="Lyrics")
 
-session.add(api_category1)
+session.add(api_category3)
 session.commit()
 
 api1 = MenuItem(title="Lyrics.ovh", description="Simple API to retrieve the lyrics of a song.",
@@ -88,9 +88,9 @@ session.commit()
 
 
 # Collection for Humor APIs
-api_category1 = ApiCategory(name="Humor")
+api_category4 = ApiCategory(name="Humor")
 
-session.add(api_category1)
+session.add(api_category4)
 session.commit()
 
 api1 = MenuItem(title="Meme Generator", description="Generate memes with preloaded images plus your copy.",
