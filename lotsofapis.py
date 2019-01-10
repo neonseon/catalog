@@ -19,6 +19,13 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# Create dummy user
+User1 = User(name="Apollonia Api", email="apollonia6@test.test",
+             picture='https://media.ntslive.co.uk/crop/400x400/e320a6ec-f59d-424f-a9a7-ffdcc4bfb654_1512604800.png')
+session.add(User1)
+session.commit()
+
+
 # Collection for Trivia APIs
 api_category1 = ApiCategory(name="Trivia")
 
