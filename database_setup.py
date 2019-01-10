@@ -23,7 +23,7 @@ class User(Base):
            'name'         : self.name,
            'id'           : self.id,
            'email'        : self.email,
-           'picture'      : self.picture,
+           'picture'      : self.picture
        }
 
 
