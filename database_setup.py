@@ -8,6 +8,25 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
+class User(Base):
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    picture = Column(String(250))
+
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'name'         : self.name,
+           'id'           : self.id,
+           'email'        : self.email,
+           'picture'      : self.picture,
+       }
+
+
 class ApiCategory(Base):
     __tablename__ = 'api_category'
 
@@ -29,6 +48,7 @@ class Api(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(80), nullable=False)
     description = Column(String(250))
+    url = Column(String(80), nullable=False)
     category_id = Column(Integer, ForeignKey('ApiCategory.id'))
     api_category = relationship(ApiCategory)
 
@@ -39,6 +59,7 @@ class Api(Base):
             'id': self.id,
             'title': self.title,
             'description': self.description,
+            'url': self.url,
             'category_id': self.category_id
         }
 
