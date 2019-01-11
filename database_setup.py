@@ -49,8 +49,8 @@ class Api(Base):
     title = Column(String(80), nullable=False)
     description = Column(String(250))
     url = Column(String(80), nullable=False)
-    category_id = Column(Integer, ForeignKey('ApiCategory.id'))
-    api_category = relationship(ApiCategory)
+    category_id = Column(Integer, ForeignKey('api_category.id'))
+    api_category = relationship(ApiCategory, backref='apis')
 
     @property
     def serialize(self):
@@ -63,6 +63,10 @@ class Api(Base):
             'category_id': self.category_id
         }
 
+def apiCategoriesJSON():
+    api_categories = session.query(ApiCategory).options(joinedload(ApiCategory.apis)).all()
+    return jsonify(api_categories=[jsonify(a.serialize, apis=[p.serialize for p in a.apis])
+        for a in api_categories])
 
 engine = create_engine('sqlite:///api.db')
 
