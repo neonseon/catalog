@@ -63,10 +63,6 @@ class Api(Base):
             'category_id': self.category_id
         }
 
-def apiCategoriesJSON():
-    api_categories = session.query(ApiCategory).options(joinedload(ApiCategory.apis)).all()
-    return jsonify(api_categories=[jsonify(a.serialize, apis=[p.serialize for p in a.apis])
-        for a in api_categories])
 
 engine = create_engine('sqlite:///api.db')
 
