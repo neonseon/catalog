@@ -1,0 +1,64 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ api_category_name }}
+			<figure class="creator">
+				<img src="{{creator.picture}}">
+				<figcaption>{{creator.name}}</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+
+			<a href="{{url_for('newApi')}}">
+				<button class="btn btn-default" id="new-menu-item">
+					<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Add API
+				</button>
+			</a>
+
+		</div>
+		<div class="col-md-7"></div>
+	</div>
+
+	{% if api !=[] %}
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+
+
+							<div class="menu-item">
+								<h2>{{api.title}}</h2>
+								<p>{{api.description}}</p>
+								<p class="menu-price">{{api.url}}</p>
+								<a href='{{url_for('editApi', api_title = api.title) }}'>Edit</a> |
+								<a href='{{url_for('deleteApi', api_title = api.title) }}'>Delete</a>
+							</div>
+
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}
+{% endblock %}
