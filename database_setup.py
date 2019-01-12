@@ -51,6 +51,8 @@ class Api(Base):
     url = Column(String(80), nullable=False)
     category_id = Column(Integer, ForeignKey('api_category.id'))
     api_category = relationship(ApiCategory, backref='apis')
+    user_id = Column(Integer,ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
