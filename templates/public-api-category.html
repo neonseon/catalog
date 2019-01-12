@@ -39,7 +39,7 @@
 					{% for a in apis %}
 							<div class="menu-item">
 								<h2>
-								{{a.title}}</h2>
+									<a href = "{{url_for('showApi', api_category_name = api_category.name, api_title = a.title)}}">{{a.title}}</a></h2>
 
 							</div>
 					{% endfor %}
