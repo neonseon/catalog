@@ -32,7 +32,7 @@
 			<div class="col-md-3">
 					{% for a in apis %}
 							<div class="menu-item">
-								<h2><a href = "{{url_for('showApi', api_title = a.title, api_category_name = api_category.name)}}">{{a.title}}</a></h2>
+								<h2><a href = "{{url_for('showApi', api_title_slug = a.slug, api_category_slug = api_category.slug)}}">{{a.title}}</a></h2>
 
 							</div>
 					{% endfor %}
