@@ -27,40 +27,40 @@ session.commit()
 
 
 # Collection for Trivia APIs
-api_category1 = ApiCategory(name="Trivia")
+api_category1 = ApiCategory(name="Trivia", slug="trivia")
 
 session.add(api_category1)
 session.commit()
 
 api1 = Api(title="JService.io", description="Serve answers and questions pulled from the televsion show Jeopardy.",
-                     url="http://jservice.io/", api_category=api_category1, user_id=1)
+                     url="http://jservice.io/", slug="jservice-io", api_category=api_category1, user_id=1)
 
 session.add(api1)
 session.commit()
 
 
 api2 = Api(title="Trivia Nerd", description="Open trivia questions with topics from Star Wars to the TV Show Firefly.",
-                     url="https://trivia.propernerd.com/", api_category=api_category1, user_id=1)
+                     url="https://trivia.propernerd.com/", slug="trivia-nerd", api_category=api_category1, user_id=1)
 
 session.add(api2)
 session.commit()
 
 
 # Collection for Game APIs
-api_category2 = ApiCategory(name="Games")
+api_category2 = ApiCategory(name="Games", slug="games")
 
 session.add(api_category2)
 session.commit()
 
 api1 = Api(title="Texas Hold 'Em", description="Easily develop a poker texas holdem game, just design the graphic.",
-                     url="https://market.mashape.com/vincy/texas-hold-em", api_category=api_category2, user_id=1)
+                     url="https://market.mashape.com/vincy/texas-hold-em", slug="texas-hold-em", api_category=api_category2, user_id=1)
 
 session.add(api1)
 session.commit()
 
 
 api2 = Api(title="Fortnite Tracker", description="An easy way for developers to get information from Fortnite.",
-                     url="https://fortnitetracker.com/site-api", api_category=api_category2, user_id=1)
+                     url="https://fortnitetracker.com/site-api", slug="fortnite-tracker", api_category=api_category2, user_id=1)
 
 session.add(api2)
 session.commit()
@@ -68,40 +68,40 @@ session.commit()
 
 
 # Collection for Lyrics APIs
-api_category3 = ApiCategory(name="Lyrics")
+api_category3 = ApiCategory(name="Lyrics", slug="lyrics")
 
 session.add(api_category3)
 session.commit()
 
 api1 = Api(title="Lyrics.ovh", description="Simple API to retrieve the lyrics of a song.",
-                     url="https://lyricsovh.docs.apiary.io/", api_category=api_category3, user_id=1)
+                     url="https://lyricsovh.docs.apiary.io/", slug="lyrics-ovh", api_category=api_category3, user_id=1)
 
 session.add(api1)
 session.commit()
 
 
 api2 = Api(title="Musixmatch", description="Over 14 million lyrics in over 50 distinct languages.",
-                     url="https://developer.musixmatch.com/", api_category=api_category3, user_id=1)
+                     url="https://developer.musixmatch.com/", slug="musixmatch", api_category=api_category3, user_id=1)
 
 session.add(api2)
 session.commit()
 
 
 # Collection for Humor APIs
-api_category4 = ApiCategory(name="Humor")
+api_category4 = ApiCategory(name="Humor", slug="humor")
 
 session.add(api_category4)
 session.commit()
 
 api1 = Api(title="Meme Generator", description="Generate memes with preloaded images plus your copy.",
-                     url="http://version1.api.memegenerator.net/", api_category=api_category4, user_id=1)
+                     url="http://version1.api.memegenerator.net/", slug="meme-generator", api_category=api_category4, user_id=1)
 
 session.add(api1)
 session.commit()
 
 
 api2 = Api(title="Geek Jokes", description="Fetch a random geeky/programming related joke.",
-                     url="https://github.com/sameerkumar18/geek-joke-api", api_category=api_category4, user_id=1)
+                     url="https://github.com/sameerkumar18/geek-joke-api", slug="geek-jokes", api_category=api_category4, user_id=1)
 
 session.add(api2)
 session.commit()
