@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker, joinedload
@@ -11,6 +12,7 @@ import httplib2
 import json
 from flask import make_response
 import requests
+from slugify import slugify
 
 app = Flask(__name__)
 
@@ -178,8 +180,8 @@ def gdisconnect():
 # JSON API Endpoint
 @app.route('/catalog.json')
 def apiCategoriesJSON():
-    api_categories = session.query(ApiCategory).options(joinedload(ApiCategory.apis)).all()
-    return jsonify(api_categories=[dict(a.serialize, apis=[i.serialize for i in a.apis])
+    api_categories = session.query(ApiCategory).options(joinedload(ApiCategory.offerings)).all()
+    return jsonify(api_categories=[dict(a.serialize, offerings=[i.serialize for i in a.offerings])
         for a in api_categories])
 
 
@@ -195,10 +197,10 @@ def showApiCategories():
 
 
 # # Show an API Category
-@app.route('/catalog/<api_category_name>/')
-@app.route('/catalog/<api_category_name>/apis/')
-def showApiCategory(api_category_name):
-    api_category = session.query(ApiCategory).filter_by(name=api_category_name).one()
+@app.route('/catalog/<api_category_slug>/')
+@app.route('/catalog/<api_category_slug>/apis/')
+def showApiCategory(api_category_slug):
+    api_category = session.query(ApiCategory).filter_by(slug=api_category_slug).one()
     apis = session.query(Api).filter_by(category_id=api_category.id).all()
     if 'username' not in login_session:
         return render_template('public-api-category.html', apis=apis, api_category=api_category, category_id=api_category.id)
@@ -207,14 +209,15 @@ def showApiCategory(api_category_name):
 
 
 # # Show an API
-@app.route('/catalog/<api_category_name>/<api_title>/')
-def showApi(api_category_name, api_title):
-    api = session.query(Api).filter_by(title=api_title).one()
+@app.route('/catalog/<api_category_slug>/<api_title_slug>/')
+def showApi(api_category_slug, api_title_slug):
+    api = session.query(Api).filter_by(slug=api_title_slug).one()
+    api_category = session.query(ApiCategory).filter_by(id=api.category_id).one()
     creator = getUserInfo(api.user_id)
     if 'username' not in login_session or creator.id != login_session['user_id']:
-        return render_template('public-api.html', api=api, api_category_name=api_category_name, creator = creator)
+        return render_template('public-api.html', api=api, api_category_name=api_category.name, creator = creator)
     else:
-        return render_template('api.html', api=api, api_category_name=api_category_name, creator = creator)
+        return render_template('api.html', api=api, api_category_name=api_category.name, creator = creator)
 
 
 # Create a new API
@@ -224,7 +227,7 @@ def newApi():
         return redirect('/login')
     if request.method == 'POST':
         newApi = Api(title=request.form['title'], description=request.form['description'], url=request.form[
-                           'url'], category_id=request.form['category'], user_id=login_session['user_id'])
+                           'url'], slug=slugify(request.form['title']), category_id=request.form['category'], user_id=login_session['user_id'])
         session.add(newApi)
         session.commit()
         flash('%s Successfully Created' % (newApi.title))
@@ -234,16 +237,17 @@ def newApi():
 
 
 # # Edit an API
-@app.route('/catalog/<api_title>/edit/', methods=['GET', 'POST'])
-def editApi(api_title):
+@app.route('/catalog/<api_title_slug>/edit/', methods=['GET', 'POST'])
+def editApi(api_title_slug):
     if 'username' not in login_session:
         return redirect('/login')
-    editedApi = session.query(Api).filter_by(title=api_title).one()
+    editedApi = session.query(Api).filter_by(slug=api_title_slug).one()
     if login_session['user_id'] != editedApi.user_id:
         return "<script>function myFunction() {alert('You are not authorized to edit this API. Please create your own API in order to have editing privileges.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['title']:
             editedApi.title = request.form['title']
+            editedApi.slug = slugify(request.form['title'])
         if request.form['description']:
             editedApi.description = request.form['description']
         if request.form['url']:
@@ -259,11 +263,11 @@ def editApi(api_title):
 
 
 # Delete an API
-@app.route('/catalog/<api_title>/delete/', methods=['GET', 'POST'])
-def deleteApi(api_title):
+@app.route('/catalog/<api_title_slug>/delete/', methods=['GET', 'POST'])
+def deleteApi(api_title_slug):
     if 'username' not in login_session:
         return redirect('/login')
-    apiToDelete = session.query(Api).filter_by(title=api_title).one()
+    apiToDelete = session.query(Api).filter_by(slug=api_title_slug).one()
     if login_session['user_id'] != apiToDelete.user_id:
         return "<script>function myFunction() {alert('You are not authorized to delete this API. Please create your own API in order to have delete privileges.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
