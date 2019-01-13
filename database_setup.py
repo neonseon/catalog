@@ -32,6 +32,8 @@ class ApiCategory(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    slug = Column(String(250), nullable=False, unique=True)
+
 
     @property
     def serialize(self):
@@ -49,8 +51,9 @@ class Api(Base):
     title = Column(String(80), nullable=False)
     description = Column(String(250))
     url = Column(String(80), nullable=False)
+    slug = Column(String(250), nullable=False, unique=True)
     category_id = Column(Integer, ForeignKey('api_category.id'))
-    api_category = relationship(ApiCategory, backref='apis')
+    api_category = relationship(ApiCategory, backref='offerings')
     user_id = Column(Integer,ForeignKey('user.id'))
     user = relationship(User)
 
