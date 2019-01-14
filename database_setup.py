@@ -48,7 +48,7 @@ class Api(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String(80), nullable=False)
-    description = Column(String(250))
+    description = Column(String(250), nullable=False)
     url = Column(String(80), nullable=False)
     slug = Column(String(250), nullable=False, unique=True)
     category_id = Column(Integer, ForeignKey('api_category.id'))
