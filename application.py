@@ -225,8 +225,8 @@ def showApi(api_category_slug, api_title_slug):
     api_category = session.query(ApiCategory).filter_by(
                    id=api.category_id).one()
     creator = getUserInfo(api.user_id)
-    if 'username' not in login_session
-    or creator.id != login_session['user_id']:
+    if ('username' not in login_session or
+            creator.id != login_session['user_id']):
         return render_template('public-api.html', api=api,
                                api_category_name=api_category.name,
                                creator=creator)
@@ -263,10 +263,10 @@ def editApi(api_title_slug):
         return redirect('/login')
     editedApi = session.query(Api).filter_by(slug=api_title_slug).one()
     if login_session['user_id'] != editedApi.user_id:
-        return "<script>function myFunction() {alert('You are not " +
-        "authorized to edit this API. Please create your own " +
-        "API in order to have editing privileges.');}" +
-        "</script><body onload='myFunction()'>"
+        return "<script>function myFunction() {alert('You are not \
+        authorized to edit this API. Please create your own \
+        API in order to have editing privileges.');}\
+        </script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['title']:
             editedApi.title = request.form['title']
@@ -292,10 +292,10 @@ def deleteApi(api_title_slug):
         return redirect('/login')
     apiToDelete = session.query(Api).filter_by(slug=api_title_slug).one()
     if login_session['user_id'] != apiToDelete.user_id:
-        return "<script>function myFunction() {alert('You are not " +
-        "authorized to delete this API. Please create your own API " +
-        "in order to have delete privileges.');}</script>" +
-        "<body onload='myFunction()'>"
+        return "<script>function myFunction() {alert('You are not \
+        authorized to delete this API. Please create your own API \
+        in order to have delete privileges.');}</script>\
+        <body onload='myFunction()'>"
     if request.method == 'POST':
         session.delete(apiToDelete)
         session.commit()
