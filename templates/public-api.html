@@ -1,51 +1,39 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
+    <div class="row divider green">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner hdr">
+        <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>{{ api_category_name }}</h1>
+        </div>
+    </div>
 
-	<div class="row divider green">
-		<div class="col-md-12"></div>
-	</div>
-	<div class="row banner menu">
-		<div class="col-md-11 col-md-offset-1 padding-none">
-			<h1>{{ api_category_name }}
-			</h1>
-
-		</div>
-	</div>
-	<div class="row padding-top padding-bottom">
-		<div class="col-md-1"></div>
-		<div class="col-md-11 padding-none">
-
-		</div>
-		<div class="col-md-7"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					<ul>
-						{% for message in messages %}
-							 <li> <strong> {{ message }} </strong> </li>
-						{% endfor %}
-					</ul>
-				{% endif %}
-			{% endwith %}
-		</div>
-	</div>
-	{% if api !=[] %}
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
-
-							<div class="menu-item">
-								<h2>{{api.title}}</h2>
-								<p>{{api.description}}</p>
-								<p class="menu-price">{{api.url}}</p>
-
-							</div>
-
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-	{% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                             <li> <strong> {{ message }} </strong> </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    {% if api !=[] %}
+        <div class="row padding-top">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="api">
+                    <h2>{{api.title}}</h2>
+                    <p>{{api.description}}</p>
+                    <p class="url">{{api.url}}</p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    {% endif %}
 {% endblock %}
