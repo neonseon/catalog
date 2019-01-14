@@ -19,6 +19,8 @@ The application allows for the following user operations:
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 - [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1)
 
+Additional descriptions below on how to use the requirements taken from [OAuth2.0 Course](https://github.com/udacity/OAuth2.0)
+
 ### VirtualBox
 
 VirtualBox is the software that actually runs the VM. [You can download it from virtualbox.org, here.](https://www.virtualbox.org/wiki/Downloads)  Install the *platform package* for your operating system.  You do not need the extension pack or the SDK. You do not need to launch VirtualBox after installing it.
