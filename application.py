@@ -124,8 +124,9 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px; border-radius: '
-    output += '150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;">'
+    output += ' " style = "width: 300px; height: 300px;'
+    output += ' border-radius: 150px; -webkit-border-radius: 150px;'
+    output += ' -moz-border-radius: 150px;">'
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -133,8 +134,9 @@ def gconnect():
 
 # User Helper Functions
 def createUser(login_session):
-    newUser = User(name=login_session['username'], email=login_session[
-                   'email'], picture=login_session['picture'])
+    newUser = User(name=login_session['username'],
+                   email=login_session['email'],
+                   picture=login_session['picture'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -150,7 +152,7 @@ def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except LookupError:
+    except:
         return None
 
 
