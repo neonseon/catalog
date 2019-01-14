@@ -32,11 +32,11 @@
             <div class="col-md-1"></div>
             <div class="col-md-10">
                 <div class="api">
-                    <h2>{{api.title}}</h2>
-                    <p>{{api.description}}</p>
-                    <p class="url">{{api.url}}</p>
-                    <a href='{{url_for('editApi', api_title_slug = api.slug) }}'>Edit</a> |
-                    <a href='{{url_for('deleteApi', api_title_slug = api.slug) }}'>Delete</a>
+                    <h2>{{ api.title }}</h2>
+                    <p>{{ api.description }}</p>
+                    <p class="url"><a href="{{ api.url }}"" target="_blank">{{api.url}}</a></p>
+                    <a href="{{ url_for('editApi', api_title_slug = api.slug) }}">Edit</a> |
+                    <a href="{{ url_for('deleteApi', api_title_slug = api.slug) }}">Delete</a>
                 </div>
             </div>
             <div class="col-md-1"></div>
