@@ -2,49 +2,41 @@
 {% block content %}
 {% include "header.html" %}
 
-	<div class="row divider green">
-		<div class="col-md-12"></div>
-	</div>
-	<div class="row banner menu">
-		<div class="col-md-11 col-md-offset-1 padding-none">
-			<h1>{{ api_category.name }}
-			</h1>
+    <div class="row divider blue">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner hdr">
+        <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>{{ api_category.name }}</h1>
+        </div>
+    </div>
 
-		</div>
-	</div>
-	<div class="row padding-top padding-bottom">
-		<div class="col-md-1"></div>
-		<div class="col-md-11 padding-none">
-
-		</div>
-		<div class="col-md-7"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					<ul>
-						{% for message in messages %}
-							 <li> <strong> {{ message }} </strong> </li>
-						{% endfor %}
-					</ul>
-				{% endif %}
-			{% endwith %}
-		</div>
-	</div>
-	{% if api_category !=[] %}
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
-					{% for a in apis %}
-							<div class="menu-item">
-								<h2>
-									<a href = "{{url_for('showApi', api_category_slug = api_category.slug, api_title_slug = a.slug)}}">{{a.title}}</a></h2>
-
-							</div>
-					{% endfor %}
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-	{% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                             <li> <strong> {{ message }} </strong> </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    {% if api_category !=[] %}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 flex-container padding-top">
+                {% for a in apis %}
+                    <div class="api-category">
+                        <a href="{{url_for('showApi', api_title_slug = a.slug, api_category_slug = api_category.slug)}}">
+                            <h2>{{a.title}}</h2>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    {% endif %}
 {% endblock %}
