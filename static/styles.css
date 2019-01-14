@@ -151,6 +151,8 @@ a {
 .creator img {
     width: 100px;
     border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
 }
 
 .creator figcaption {
@@ -187,6 +189,8 @@ a {
     text-align: center;
     height: 200px;
     border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
