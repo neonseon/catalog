@@ -18,13 +18,13 @@ class User(Base):
 
     @property
     def serialize(self):
-       """Return object data in easily serializeable format"""
-       return {
-           'name'         : self.name,
-           'id'           : self.id,
-           'email'        : self.email,
-           'picture'      : self.picture
-       }
+        """Return object data in easily serializeable format"""
+        return {
+           'name': self.name,
+           'id': self.id,
+           'email': self.email,
+           'picture': self.picture
+        }
 
 
 class ApiCategory(Base):
@@ -33,7 +33,6 @@ class ApiCategory(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     slug = Column(String(250), nullable=False, unique=True)
-
 
     @property
     def serialize(self):
@@ -54,7 +53,7 @@ class Api(Base):
     slug = Column(String(250), nullable=False, unique=True)
     category_id = Column(Integer, ForeignKey('api_category.id'))
     api_category = relationship(ApiCategory, backref='offerings')
-    user_id = Column(Integer,ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
     @property
@@ -70,6 +69,5 @@ class Api(Base):
 
 
 engine = create_engine('sqlite:///api.db')
-
 
 Base.metadata.create_all(engine)
