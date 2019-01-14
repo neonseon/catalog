@@ -14,12 +14,14 @@ The application allows for the following user operations:
 2. Edit an API's values and category (if user is authorized)
 3. Delete an API (if user is authorized)
 
+Inspiration for design is attributed to [Lesson 3 of Udacity Course ud330](https://github.com/udacity/ud330).
+
 ## Requirements
 
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 - [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1)
 
-Additional descriptions below on how to use the requirements taken from [OAuth2.0 Course](https://github.com/udacity/OAuth2.0)
+Additional descriptions below on how to use the requirements taken from [OAuth2.0 Course](https://github.com/udacity/OAuth2.0).
 
 ### VirtualBox
 
