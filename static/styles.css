@@ -208,3 +208,8 @@ a {
 .url {
     font-weight: bold;
 }
+
+.url a {
+    font-size: 17px;
+    font-weight: normal;
+}
