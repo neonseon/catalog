@@ -51,7 +51,7 @@ The app's API endpoint can be accessed at /catalog.json.
 
 ### Authentication
 
-This application handles authentication through Google OAuth 2.0. Replace the credentials in client_secrets.json with your own.
+This application handles authentication through Google OAuth 2.0. Replace the credentials in `client_secrets.json` and template `login.html` with your own.
 
 ## Contributing
 
